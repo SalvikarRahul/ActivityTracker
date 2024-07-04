@@ -17,6 +17,8 @@
 		B7CA302B2C3677E300C8B239 /* ActivityTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CA302A2C3677E300C8B239 /* ActivityTrackerTests.swift */; };
 		B7CA30352C3677E300C8B239 /* ActivityTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CA30342C3677E300C8B239 /* ActivityTrackerUITests.swift */; };
 		B7CA30372C3677E300C8B239 /* ActivityTrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CA30362C3677E300C8B239 /* ActivityTrackerUITestsLaunchTests.swift */; };
+		B7CA30442C367AB900C8B239 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CA30432C367AB800C8B239 /* CameraService.swift */; };
+		B7CA30462C367CA500C8B239 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CA30452C367CA500C8B239 /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		B7CA30302C3677E300C8B239 /* ActivityTrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ActivityTrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7CA30342C3677E300C8B239 /* ActivityTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTrackerUITests.swift; sourceTree = "<group>"; };
 		B7CA30362C3677E300C8B239 /* ActivityTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B7CA30432C367AB800C8B239 /* CameraService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
+		B7CA30452C367CA500C8B239 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,8 @@
 				B7CA30102C3677E000C8B239 /* AppDelegate.swift */,
 				B7CA30122C3677E000C8B239 /* SceneDelegate.swift */,
 				B7CA30142C3677E000C8B239 /* ViewController.swift */,
+				B7CA30432C367AB800C8B239 /* CameraService.swift */,
+				B7CA30452C367CA500C8B239 /* Helpers.swift */,
 				B7CA30162C3677E000C8B239 /* Main.storyboard */,
 				B7CA301C2C3677E300C8B239 /* Assets.xcassets */,
 				B7CA301E2C3677E300C8B239 /* LaunchScreen.storyboard */,
@@ -261,6 +267,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7CA30442C367AB900C8B239 /* CameraService.swift in Sources */,
+				B7CA30462C367CA500C8B239 /* Helpers.swift in Sources */,
 				B7CA30152C3677E000C8B239 /* ViewController.swift in Sources */,
 				B7CA301B2C3677E000C8B239 /* ActivityTracker.xcdatamodeld in Sources */,
 				B7CA30112C3677E000C8B239 /* AppDelegate.swift in Sources */,
