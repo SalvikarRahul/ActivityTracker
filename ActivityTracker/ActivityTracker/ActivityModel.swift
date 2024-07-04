@@ -9,4 +9,5 @@ import Foundation
 
 struct ActivityModel: Codable {
     let activityName: String
+    let activities: [String]
 }

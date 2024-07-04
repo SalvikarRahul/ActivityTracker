@@ -7,13 +7,17 @@
 
 import UIKit
 
-class ActivityViewController: UIViewController {
+class ActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet weak var tableView: UITableView!
     var activity: ActivityModel? = nil
     var cameraService = CameraService()
     let previewView = UIView(frame: .zero)
+    let activitiesArray = ["abc", "cds"]
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCameraPreviewView()
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +42,16 @@ class ActivityViewController: UIViewController {
     // Ensure that the interface stays locked in Portrait.
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
         return .portrait
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return activitiesArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "recordData", for: indexPath)
+        cell.textLabel?.text = activitiesArray[indexPath.row]
+        return cell
     }
 }
 

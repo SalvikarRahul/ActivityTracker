@@ -7,10 +7,11 @@
 
 import UIKit
 
-class DashboardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class DashboardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddActivityDelegate {
+    
     
     @IBOutlet weak var tableView: UITableView!
-    let activityArray = [ActivityModel(activityName: "LTTS"), ActivityModel(activityName: "GYM")]
+    var activityArray = [ActivityModel(activityName: "LTTS", activities: ["LTTS_SEZ_IN", "LTTS_SEZ_OUT", "LTTS_MODX_IN", "LTTS_MODX_OUT"]), ActivityModel(activityName: "GYM", activities: ["LTTS_GYM_IN", "LTTS_GYM_OUT"])]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
@@ -38,7 +39,18 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
         if let vc = segue.destination as? ActivityViewController {
             vc.activity = sender as? ActivityModel
         }
+        
+        if let vc = segue.destination as? AddActivityViewController {
+            vc.delegate = self
+        }
     }
 
+    @IBAction func addAction(_ sender: Any) {
+        performSegue(withIdentifier: "AddActivity", sender: nil)
+    }
+    func addActivity(activityModel: ActivityModel) {
+        activityArray.append(activityModel)
+        self.tableView.reloadData()
+    }
 
 }
