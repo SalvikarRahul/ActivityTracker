@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="yml-ei-S06">
-                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                                <rect key="frame" x="0.0" y="72" width="414" height="664"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="dashboardCell" id="VyW-0h-lxy">
@@ -41,18 +41,35 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yml-ei-S06" secondAttribute="trailing" id="D4I-eR-gDc"/>
                             <constraint firstItem="yml-ei-S06" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="NQm-nf-VeB"/>
-                            <constraint firstItem="yml-ei-S06" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Tah-Bw-9k1"/>
+                            <constraint firstItem="yml-ei-S06" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="Tah-Bw-9k1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="yml-ei-S06" secondAttribute="bottom" id="qpC-Bc-Yer"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Activity Tracker" id="dpR-yp-T0V"/>
                     <connections>
                         <outlet property="tableView" destination="yml-ei-S06" id="K31-fF-onb"/>
+                        <segue destination="9sJ-a3-fPz" kind="show" identifier="gotoActivity" id="eTG-5G-eFn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="924.63768115942037" y="-27.717391304347828"/>
+        </scene>
+        <!--Activity View Controller-->
+        <scene sceneID="0jW-1n-jh9">
+            <objects>
+                <viewController id="9sJ-a3-fPz" customClass="ActivityViewController" customModule="ActivityTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Qui-l6-bKa">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="m6m-mm-5NM"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="kB5-rn-SV9"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uZV-x9-aPi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1800" y="-28"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NZc-Ag-4Py">
