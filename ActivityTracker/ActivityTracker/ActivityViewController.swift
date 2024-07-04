@@ -12,7 +12,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     var activity: ActivityModel? = nil
     var cameraService = CameraService()
     let previewView = UIView(frame: .zero)
-    var activitiesArray: [String] = []
+    var activitiesArray: [ActivityModel] = []
     var timer = Timer()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +53,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recordData", for: indexPath)
-        cell.textLabel?.text = activitiesArray[indexPath.row]
+        cell.textLabel?.text = activitiesArray[indexPath.row].dateFormated
         return cell
     }
 }
@@ -79,7 +79,24 @@ extension ActivityViewController {
         }
     }
     
-    func activityDetected() {
+    func activityDetected(date: Date, dateInt64: Int64, selectedItem: String) {
+        guard let activityObj = activity else {
+            return
+        }
+        if activityObj.isNeedToConsiderSorting {
+            if selectedItem.contains("IN") {
+                if activitiesArray.isEmpty {
+                    activitiesArray.append(ActivityModel(activityName: activityObj.activityName, activities: activityObj.activities, date: dateInt64, dateFormated: "IN - " + returnCurrentDate(date: date), isNeedToConsiderSorting: activityObj.isNeedToConsiderSorting, selectedActivity: selectedItem))
+                }
+            } else if selectedItem.contains("OUT"){
+                if let lastActivity = activitiesArray.last {
+                    if lastActivity.selectedActivity.contains("OUT") {
+                        activitiesArray[activitiesArray.count - 1] = ActivityModel(activityName: activityObj.activityName, activities: activityObj.activities, date: dateInt64, dateFormated: "OUT - " + returnCurrentDate(date: date), isNeedToConsiderSorting: activityObj.isNeedToConsiderSorting, selectedActivity: selectedItem)
+                    }
+                }
+            }
+        }
+        
         removePreviewScreen()
     }
 
@@ -88,6 +105,7 @@ extension ActivityViewController {
         self.cameraService.stop()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
             self.previewView.removeFromSuperview()
+            self.tableView.reloadData()
         })
     }
 }

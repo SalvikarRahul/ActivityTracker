@@ -12,7 +12,7 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    var activityArray = [ActivityModel(activityName: "LTTS", activities: [ "[LTTS_MODX_IN]", "[LTTS_MODX_OUT]"]), ActivityModel(activityName: "GYM", activities: ["[LTTS_SEZ_IN]", "[LTTS_SEZ_OUT]"])]
+    var activityArray = [ActivityModel(activityName: "LTTS", activities: [ "[LTTS_MODX_IN]", "[LTTS_MODX_OUT]"], date: 0, dateFormated: "", isNeedToConsiderSorting: true, selectedActivity: ""), ActivityModel(activityName: "GYM", activities: ["[LTTS_SEZ_IN]", "[LTTS_SEZ_OUT]"], date: 0, dateFormated: "", isNeedToConsiderSorting: true, selectedActivity: "")]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self

@@ -10,4 +10,8 @@ import Foundation
 struct ActivityModel: Codable {
     let activityName: String
     let activities: [String]
+    let date: Int64
+    let dateFormated: String
+    let isNeedToConsiderSorting: Bool
+    let selectedActivity: String
 }

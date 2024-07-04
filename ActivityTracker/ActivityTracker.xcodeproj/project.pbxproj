@@ -23,6 +23,7 @@
 		B7CA304A2C36845600C8B239 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CA30492C36845600C8B239 /* ActivityViewController.swift */; };
 		B7CA304C2C3684A800C8B239 /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CA304B2C3684A800C8B239 /* ActivityModel.swift */; };
 		B7CA304E2C36A4A100C8B239 /* AddActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CA304D2C36A4A100C8B239 /* AddActivityViewController.swift */; };
+		B7CA30502C36CE7400C8B239 /* Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CA304F2C36CE7400C8B239 /* Extenstion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		B7CA30492C36845600C8B239 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		B7CA304B2C3684A800C8B239 /* ActivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityModel.swift; sourceTree = "<group>"; };
 		B7CA304D2C36A4A100C8B239 /* AddActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActivityViewController.swift; sourceTree = "<group>"; };
+		B7CA304F2C36CE7400C8B239 /* Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extenstion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 				B7CA301E2C3677E300C8B239 /* LaunchScreen.storyboard */,
 				B7CA30212C3677E300C8B239 /* Info.plist */,
 				B7CA30192C3677E000C8B239 /* ActivityTracker.xcdatamodeld */,
+				B7CA304F2C36CE7400C8B239 /* Extenstion.swift */,
 			);
 			path = ActivityTracker;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				B7CA304C2C3684A800C8B239 /* ActivityModel.swift in Sources */,
 				B7CA304E2C36A4A100C8B239 /* AddActivityViewController.swift in Sources */,
 				B7CA30462C367CA500C8B239 /* Helpers.swift in Sources */,
+				B7CA30502C36CE7400C8B239 /* Extenstion.swift in Sources */,
 				B7CA304A2C36845600C8B239 /* ActivityViewController.swift in Sources */,
 				B7CA30152C3677E000C8B239 /* ViewController.swift in Sources */,
 				B7CA301B2C3677E000C8B239 /* ActivityTracker.xcdatamodeld in Sources */,

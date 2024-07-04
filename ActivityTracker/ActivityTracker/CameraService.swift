@@ -34,7 +34,7 @@ import AVFoundation
 import Vision
 
 protocol CameraServiceDelegate: AnyObject {
-    func activityDetected()
+    func activityDetected(date: Date, dateInt64: Int64, selectedItem: String)
 }
 
 class CameraService: NSObject {
@@ -205,7 +205,7 @@ extension CameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
 //                    DispatchQueue.main.async {
 //                        AudioServicesPlayAlertSound(SystemSoundID(1021))
 //                    }
-                    self.cameraServiceDelegate?.activityDetected()
+                    self.cameraServiceDelegate?.activityDetected(date: Date(), dateInt64: Date.currentTimeStamp, selectedItem: item)
                     break
                 }
             }
