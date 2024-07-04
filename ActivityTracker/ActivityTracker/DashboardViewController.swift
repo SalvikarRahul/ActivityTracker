@@ -10,13 +10,15 @@ import UIKit
 class DashboardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddActivityDelegate {
     
     
+    @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    var activityArray = [ActivityModel(activityName: "LTTS", activities: ["LTTS_SEZ_IN", "LTTS_SEZ_OUT", "LTTS_MODX_IN", "LTTS_MODX_OUT"]), ActivityModel(activityName: "GYM", activities: ["LTTS_GYM_IN", "LTTS_GYM_OUT"])]
+    var activityArray = [ActivityModel(activityName: "LTTS", activities: [ "[LTTS_MODX_IN]", "[LTTS_MODX_OUT]"]), ActivityModel(activityName: "GYM", activities: ["[LTTS_SEZ_IN]", "[LTTS_SEZ_OUT]"])]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         // Do any additional setup after loading the view.
+        self.plusButton.layer.cornerRadius = self.plusButton.frame.height/2
     }
 
     // MARK: TableViewDatasource

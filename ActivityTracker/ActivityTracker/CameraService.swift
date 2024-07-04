@@ -33,8 +33,13 @@ import UIKit
 import AVFoundation
 import Vision
 
+protocol CameraServiceDelegate: AnyObject {
+    func activityDetected()
+}
+
 class CameraService: NSObject {
     var player: AVAudioPlayer?
+    weak var cameraServiceDelegate: CameraServiceDelegate?
     private weak var previewView: UIView?
     private(set) var cameraIsReadyToUse = false
     private let session = AVCaptureSession()
@@ -47,7 +52,7 @@ class CameraService: NSObject {
     private var captureCompletionBlock: ((UIImage) -> Void)?
     private var preparingCompletionHandler: ((Bool) -> Void)?
     private var snapshotImageOrientation = UIImage.Orientation.upMirrored
-
+    var searchTextArray: [String]? = nil
     private var cameraPosition = AVCaptureDevice.Position.front {
         didSet {
             switch cameraPosition {
@@ -189,14 +194,18 @@ extension CameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
             let fullNameArr = text.components(separatedBy: ",")
             print(fullNameArr)
             var isResultMatch = false
-            let arrayOfString = ["[LTTS_SEZ_IN]", "protein"]
+            guard let arrayOfString = self.searchTextArray else {
+                return
+            }// ["[LTTS_SEZ_IN]", "protein"]
+            print("arrayOfString ->", arrayOfString)
             for item in arrayOfString {
                 isResultMatch = fullNameArr.contains(item)
                 if isResultMatch {
                     print("\(Date()) : value match -> \(item) and array -> \(fullNameArr)")
-                    DispatchQueue.main.async {
-                        AudioServicesPlayAlertSound(SystemSoundID(1021))
-                    }
+//                    DispatchQueue.main.async {
+//                        AudioServicesPlayAlertSound(SystemSoundID(1021))
+//                    }
+                    self.cameraServiceDelegate?.activityDetected()
                     break
                 }
             }

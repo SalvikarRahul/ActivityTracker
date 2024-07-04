@@ -65,6 +65,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Activity Tracker" id="dpR-yp-T0V"/>
                     <connections>
+                        <outlet property="plusButton" destination="Kc7-g6-wvo" id="UNT-z6-aEg"/>
                         <outlet property="tableView" destination="yml-ei-S06" id="K31-fF-onb"/>
                         <segue destination="9sJ-a3-fPz" kind="show" identifier="gotoActivity" id="eTG-5G-eFn"/>
                         <segue destination="t6N-mz-ssj" kind="show" identifier="AddActivity" id="wPT-C8-FvU"/>

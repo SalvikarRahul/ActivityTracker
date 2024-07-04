@@ -24,7 +24,8 @@ class AddActivityViewController: UIViewController {
     
     @IBAction func SaveButtonAction(_ sender: Any) {
         guard let activityName = activityName.text else {return}
-        guard let activitySearch = searchText.text else {return}
+        guard var activitySearch = searchText.text else {return}
+        activitySearch = activitySearch.trimmingCharacters(in: .whitespaces)
         delegate?.addActivity(activityModel: ActivityModel(activityName: activityName, activities: [activitySearch]))
         self.navigationController?.popViewController(animated: true)
     }

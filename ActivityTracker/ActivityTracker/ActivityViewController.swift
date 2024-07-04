@@ -7,12 +7,13 @@
 
 import UIKit
 
-class ActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CameraServiceDelegate {
     @IBOutlet weak var tableView: UITableView!
     var activity: ActivityModel? = nil
     var cameraService = CameraService()
     let previewView = UIView(frame: .zero)
-    let activitiesArray = ["abc", "cds"]
+    var activitiesArray: [String] = []
+    var timer = Timer()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCameraPreviewView()
@@ -23,11 +24,13 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         cameraService.start()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: {
-            self.removePreviewScreen()
-            self.cameraService.stop()
-        })
+        cameraService.cameraServiceDelegate = self
+        timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: false)
     }
+    @objc func timerAction(){
+        self.removePreviewScreen()
+    }
+
     /*
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -66,11 +69,25 @@ extension ActivityViewController {
         previewView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         previewView.layoutIfNeeded()
         cameraService.prepare(previewView: previewView, cameraPosition: .back) { [weak self] success in
-            if success { self?.cameraService.start() }
+            if success {
+                guard let activityData = self?.activity?.activities else {
+                    return
+                }
+                self?.cameraService.searchTextArray = activityData
+                self?.cameraService.start()
+            }
         }
     }
     
+    func activityDetected() {
+        removePreviewScreen()
+    }
+
     private func removePreviewScreen() {
-        previewView.removeFromSuperview()
+        self.timer.invalidate()
+        self.cameraService.stop()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+            self.previewView.removeFromSuperview()
+        })
     }
 }
