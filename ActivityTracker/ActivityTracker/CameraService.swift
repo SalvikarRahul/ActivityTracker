@@ -34,7 +34,7 @@ import AVFoundation
 import Vision
 
 protocol CameraServiceDelegate: AnyObject {
-    func activityDetected(date: Date, dateInt64: Int64, selectedItem: String)
+    func activityDetected(date: Date, selectedItem: String)
 }
 
 class CameraService: NSObject {
@@ -52,7 +52,7 @@ class CameraService: NSObject {
     private var captureCompletionBlock: ((UIImage) -> Void)?
     private var preparingCompletionHandler: ((Bool) -> Void)?
     private var snapshotImageOrientation = UIImage.Orientation.upMirrored
-    var searchTextArray: [String]? = nil
+    var searchTextArray: [String] = []
     private var cameraPosition = AVCaptureDevice.Position.front {
         didSet {
             switch cameraPosition {
@@ -194,18 +194,18 @@ extension CameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
             let fullNameArr = text.components(separatedBy: ",")
             print(fullNameArr)
             var isResultMatch = false
-            guard let arrayOfString = self.searchTextArray else {
-                return
-            }// ["[LTTS_SEZ_IN]", "protein"]
-            print("arrayOfString ->", arrayOfString)
-            for item in arrayOfString {
+//            guard let arrayOfString = self.searchTextArray else {
+//                return
+//            }// ["[LTTS_SEZ_IN]", "protein"]
+            print("arrayOfString ->", self.searchTextArray)
+            for item in self.searchTextArray {
                 isResultMatch = fullNameArr.contains(item)
                 if isResultMatch {
                     print("\(Date()) : value match -> \(item) and array -> \(fullNameArr)")
 //                    DispatchQueue.main.async {
 //                        AudioServicesPlayAlertSound(SystemSoundID(1021))
 //                    }
-                    self.cameraServiceDelegate?.activityDetected(date: Date(), dateInt64: Date.currentTimeStamp, selectedItem: item)
+                    self.cameraServiceDelegate?.activityDetected(date: Date(), selectedItem: item)
                     break
                 }
             }

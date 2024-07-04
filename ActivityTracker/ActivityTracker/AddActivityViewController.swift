@@ -26,7 +26,7 @@ class AddActivityViewController: UIViewController {
         guard let activityName = activityName.text else {return}
         guard var activitySearch = searchText.text else {return}
         activitySearch = activitySearch.trimmingCharacters(in: .whitespaces)
-        delegate?.addActivity(activityModel: ActivityModel(activityName: activityName, activities: [activitySearch], date: Date.currentTimeStamp, dateFormated: returnCurrentDate(date: Date()), isNeedToConsiderSorting: false, selectedActivity: ""))
+        delegate?.addActivity(activityModel: ActivityModel(activityName: activityName, activities: [activitySearch], isNeedToConsiderSorting: false))
         self.navigationController?.popViewController(animated: true)
     }
     
