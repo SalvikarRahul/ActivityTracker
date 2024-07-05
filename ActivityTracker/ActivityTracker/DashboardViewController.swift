@@ -6,13 +6,14 @@
 //
 
 import UIKit
+import Alamofire
 
 class DashboardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddActivityDelegate {
     
     
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    var activityArray = [ActivityModel(activityName: "LTTS", activities: [ "[LTTS_MODX_IN]", "[LTTS_MODX_OUT]"], isNeedToConsiderSorting: true), ActivityModel(activityName: "SEZ", activities: ["[LTTS_SEZ_IN]", "[LTTS_SEZ_OUT]"], isNeedToConsiderSorting: true)]
+    var activityArray = [ActivityModel(activityName: "MODX", activities: [ "[LTTS_MODX_IN]", "[LTTS_MODX_OUT]"], isNeedToConsiderSorting: true), ActivityModel(activityName: "SEZ", activities: ["[LTTS_SEZ_IN]", "[LTTS_SEZ_OUT]"], isNeedToConsiderSorting: true)]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
@@ -24,7 +25,8 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
             UserDefaults.standard.setValue("Write Done", forKey: "FirstTime")
         }
     }
-    
+
+
 //    override func viewWillAppear(_ animated: Bool) {
 //        super.viewWillAppear(animated)
 //        self.fetchCoreData { data in
@@ -103,8 +105,60 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
         performSegue(withIdentifier: "AddActivity", sender: nil)
     }
     func addActivity(activityModel: ActivityModel) {
-//        activityArray.append(activityModel)
-//        self.tableView.reloadData()
+        activityArray.append(activityModel)
+        self.tableView.reloadData()
     }
 
 }
+
+class APIFetchHandler {
+    static let sharedInstance = APIFetchHandler()
+   func fetchAPIData() {
+      let url = "http://192.168.204.8/ActivityTracker/GetActivities";
+      AF.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil)
+        .response{ resp in
+            switch resp.result{
+              case .success(let data):
+                do{
+                  let jsonData = try JSONDecoder().decode([Model].self, from: data!)
+                  print(jsonData)
+               } catch {
+                  print(error.localizedDescription)
+               }
+             case .failure(let error):
+               print(error.localizedDescription)
+             }
+        }
+   }
+    
+    func postAPIData(startTime: String, endTime: String) {
+        let parameters: Parameters = [
+            "customerID":2,
+            "eventIdIn":1,
+            "startTime": startTime,
+            "stopTime": endTime,
+            "evenT_CLOSED_BY": "USER"
+        ]
+
+       let url = "http://192.168.204.8/ActivityTracker/UpdateActivity";
+       AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil, interceptor: nil)
+         .response{ resp in
+             switch resp.result{
+               case .success(let data):
+                 print(data)
+              case .failure(let error):
+                print(error.localizedDescription)
+              }
+         }
+    }
+
+}
+
+struct Model:Codable {
+   let eventID: Int
+   let eventName: String
+   let eventIn: String
+   let eventOut: String
+    let inAtive: Bool
+}
+

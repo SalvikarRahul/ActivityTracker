@@ -90,6 +90,9 @@ extension ActivityViewController {
         guard let activityObj = actvityModel else {
             return
         }
+        
+        let api = APIFetchHandler()
+
 
         DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
             if activityObj.isNeedToConsiderSorting {
@@ -106,6 +109,8 @@ extension ActivityViewController {
                     newData2.selectedActivity = selectedItem
                     do {
                         try context.save()
+                        api.postAPIData(startTime: sendServerCurrentDate(date: date), endTime: sendServerCurrentDate(date: date))
+
                     } catch {
                         print("error-Saving data")
                     }
@@ -122,6 +127,8 @@ extension ActivityViewController {
                     newData2.selectedActivity = selectedItem
                     do {
                         try context.save()
+                        api.postAPIData(startTime: sendServerCurrentDate(date: date), endTime: sendServerCurrentDate(date: date))
+
                     } catch {
                         print("error-Saving data")
                     }
@@ -160,8 +167,15 @@ extension ActivityViewController {
         let diff = Int(outLastObj.timeIntervalSince1970 - inFirstObj.timeIntervalSince1970)
         let hours = diff / 3600
         let minutes = (diff - hours * 3600) / 60
-        print("\(hours):\(minutes)")
-        displayTime.text = "\(hours):\(minutes)"
+        let seconds = (diff % 3600) % 60
+        print("\(hours):\(minutes):\(seconds)")
+
+        
+        print(String((diff % 86400) / 3600) + " hours")
+        print(String((diff % 3600) / 60) + " minutes")
+        print(String((diff % 3600) % 60) + " seconds")
+
+        displayTime.text = "\(hours):\(minutes):\(seconds)"
     }
     
     func fetchCoreData(onSuccess: @escaping ([Activity]?) -> Void) {
